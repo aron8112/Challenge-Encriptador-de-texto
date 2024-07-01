@@ -1,0 +1,154 @@
+:root {
+    --background-color: #222;
+    --font-color: white;
+
+    --font-family: sans serif;
+
+    --button-primary: #22df45
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding-top: 60px;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    color: var(--font-color);
+}
+
+header {
+    padding: 2%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2%;
+    z-index: 1000;
+    box-shadow: 0px 10px 10px 5px rgb(23 134 163 / 26%);
+    background-color: rgba(29, 29, 29, 0.75);
+    display: flex;
+}
+
+header nav {
+    justify-content: flex-end;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10%;
+}
+
+section {
+    margin: 2%;
+    justify-content: center;
+}
+
+small {
+    margin-top: 5%;
+}
+
+.left-side {
+    width: 60%;
+    flex-direction: column;
+}
+
+.left-side input {
+    width: 100%;
+    height: 50vh;
+}
+
+.left-side .buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttons button {
+    width: 45%;
+    height: 40px;
+    margin: 24px;
+    border-radius: 30px;
+}
+
+.encrypt {
+    background-color: var(--button-primary);
+}
+
+footer {
+    color: var(--color-primario);
+    background-color: var(--color-terciario);
+    padding: 24px;
+    text-align: center;
+    font-family: var(--fuente-montserrat);
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/* Estilos para teléfonos inteligentes */
+@media (max-width: 480px) {
+    header {
+        padding: 2%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2%;
+        z-index: 1000;
+        box-shadow: 0px 10px 10px 5px rgba(105, 105, 105, 0.26);
+        background-color: rgba(255, 255, 255, 0.75);
+        display: flex;
+    }
+
+
+    main {
+        flex-direction: column;
+        padding: auto;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    .left-side {
+        width: 100%;
+    }
+
+    .left-side .buttons {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5%;
+    }
+
+    .buttons button {
+        width: 100%;
+        height: 40px;
+        margin: 5px;
+        border-radius: 30px;
+    }
+}
+
+/* Estilos para tablets */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: auto;
+        margin: 5%;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    .left-side {
+        width: 100%;
+        padding: auto;
+    }
+
+    .left-side input {
+        padding: auto;
+    }
+}
