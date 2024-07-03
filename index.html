@@ -6,39 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="shortcut icon" href="./assets/trophy.png" type="image/x-icon">
-    <title>Challenge ONE - Encriptador de texto</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Encriptador de texto</title>
+
 </head>
 
 <body>
     <header>
-        <nav>
-            <img src="./assets/logo.png" alt="Logo">
-            <h1>Encriptador de texto</h1>
-        </nav>
-
+        <img src="./assets/logo.png" alt="Logo">
     </header>
     <main>
         <section class="left-side">
             <!-- <label for="entrada"> Introduzca aquí su texto: </label> -->
-            <input type="text" name="entrada" id="entrada" placeholder="Introduzca aquí su texto">
+            <input type="text" name="entrada" id="entrada" placeholder="Introduzca aquí su texto"
+                oninput="validateStrings();">
+            <p id="errorMessage">Solamente se permiten letras minúsculas</p>
             <br>
             <br>
-            <small>Solo letras minúsculas y sin acentos</small>
+            <small id="wordchecker"><span class="material-symbols-rounded">
+                    error
+                </span>Solo letras minúsculas y sin acentos</small>
             <div class="buttons">
-                <button class="encrypt" type="submit">Encriptar</button>
-                <button class="undo-encrypt" type="submit">Desencriptar</button>
+                <button class="encrypt" onclick="crypting();"><span class="material-symbols-rounded">
+                        key
+                    </span>| Encriptar</button>
+                <button class="undo-encrypt" onclick="decodeString();"><span class="material-symbols-rounded">
+                        key_off
+                    </span>| Desencriptar</button>
             </div>
         </section>
         <section class="right-side">
-            <div>
+            <div id="sinResultado">
                 <img src="./assets/Muñeco.png" alt="sin mensaje para mostrar">
-                <p></p>
+                <h3>Ningún mensaje fue encontrado</h3>
+                <hr>
+                <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+            </div>
+            <div id="conResultado">
+                <p id="resultado"></p>
+                <br>
+                <div class="buttons2">
+                    <button class="copyButton" onclick="copyResult();">Copiar</button>
+                    <button class="cleanButton">Limpiar resultado</button>
+                </div>
             </div>
         </section>
+        <script src="./js/app.js"></script>
     </main>
-    <footer>
-        <small>Hola Mundo!</small>
-    </footer>
+
 </body>
 
 </html>

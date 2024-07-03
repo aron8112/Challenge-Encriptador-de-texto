@@ -1,19 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 :root {
-    --background-color: #222;
+    /*Background colors */
+    --background-color: #D8DFE8;
+    --background-color-header: #b6b9bd;
+    --background-right-side: white;
+
+    /*Font*/
+    --font-family: "Inter", sans-serif;
+
+    /*Font colors*/
     --font-color: white;
+    --font-color-secondary: #343A40;
+    --font-color-input: #0A3871;
+    --font-color-button-secondary: #052051;
 
-    --font-family: sans serif;
-
-    --button-primary: #22df45
+    /*Button colors*/
+    --button-primary: #0A3871;
+    --button-primary-hover: #052246;
+    --button-secondary: #868E96;
 }
 
 * {
     padding: 0;
     margin: 0;
+    font-family: var(--font-family);
 }
 
 body {
-    padding-top: 60px;
     box-sizing: border-box;
     background-color: var(--background-color);
     color: var(--font-color);
@@ -25,41 +39,53 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 2%;
-    z-index: 1000;
-    box-shadow: 0px 10px 10px 5px rgb(23 134 163 / 26%);
-    background-color: rgba(29, 29, 29, 0.75);
+    height: 1%;
+    background-color: var(--background-color-header);
     display: flex;
+    align-items: center;
 }
 
-header nav {
-    justify-content: flex-end;
+header img {
+    width: auto;
+    height: 30px;
 }
 
 main {
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
     flex-direction: row;
-    padding: 10%;
+    padding: 5%;
 }
 
 section {
+    display: flex;
     margin: 2%;
     justify-content: center;
 }
 
-small {
-    margin-top: 5%;
-}
-
 .left-side {
-    width: 60%;
+    width: 80%;
     flex-direction: column;
 }
 
 .left-side input {
     width: 100%;
-    height: 50vh;
+    height: 90%;
+    border: 0;
+    border-radius: 24px;
+    background-color: var(--background-color);
+    font-size: 1.05rem;
+    font-family: var(--font-family);
+    color: var(--font-color-input);
+    display: flex;
+}
+
+small {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+    color: var(--font-color-secondary)
 }
 
 .left-side .buttons {
@@ -68,25 +94,121 @@ small {
 }
 
 .buttons button {
+    display: flex;
     width: 45%;
     height: 40px;
     margin: 24px;
-    border-radius: 30px;
+    border-radius: 24px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.undo-encrypt {
+    background-color: var(--button-secondary);
+    border: 1px solid var(--button-primary);
+    color: var(--font-color-button-secondary);
+}
+
+.undo-encrypt:hover {
+    background-color: var(--button-primary);
+    color: var(--font-color);
 }
 
 .encrypt {
     background-color: var(--button-primary);
+    color: var(--font-color);
 }
 
-footer {
-    color: var(--color-primario);
-    background-color: var(--color-terciario);
-    padding: 24px;
-    text-align: center;
-    font-family: var(--fuente-montserrat);
-    font-size: 1.25rem;
-    font-weight: 400;
+.encrypt:hover {
+    background-color: var(--button-primary-hover);
+    border: 1px solid var(--button-primary);
+    color: var(--font-color);
+    font-weight: 700;
+    font-stretch: extra-expanded;
 }
+
+.right-side {
+    height: 75vh;
+    width: 25%;
+    border: 0;
+    padding: 1%;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-right-side);
+}
+
+.right-side #conResultado {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.right-side img {
+    width: 100%;
+}
+
+.right-side #sinResultado {
+    width: 100%;
+    font-size: 1rem;
+    color: var(--font-color-secondary);
+    text-align: center;
+}
+
+.right-side #sinResultado h3 {
+    margin: 2%;
+}
+
+.right-side #sinResultado p {
+    margin-top: 5%;
+}
+
+
+#errorMessage {
+    color: red;
+    display: none;
+    margin-top: 2%;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+#conResultado {
+    display: none;
+}
+
+#conResultado #resultado {
+    color: var(--font-color-secondary);
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.right-side #conResultado .buttons2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+.buttons2 button {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    margin: 2% 0;
+    border-radius: 24px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyButton {}
+
+.cleanButton {}
 
 /* Estilos para teléfonos inteligentes */
 @media (max-width: 480px) {
@@ -151,4 +273,13 @@ footer {
     .left-side input {
         padding: auto;
     }
+}
+
+.material-symbols-rounded {
+    margin-right: 1%;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 24
 }
