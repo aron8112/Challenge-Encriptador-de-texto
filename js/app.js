@@ -1,4 +1,4 @@
-//Valores de reemplazo
+//Replace values for each vowel
 const replaces = {
   e: 'enter',
   i: 'imes',
@@ -8,7 +8,7 @@ const replaces = {
 };
 
 /**
- * CRYPTING FUNCTIONS
+ * ENCRYPTION FUNCTIONS
  * ------------------
  *
  */
@@ -16,96 +16,68 @@ const replaces = {
 function crypting() {
   let text = document.getElementById('entrada').value;
 
-  /**
-   *
-   * Convierto el texto (string) en un array, y si es una vocal ejecuta el cambio,
-   * finalmente con el método join retorno nuevamente el texto con los reemplazos
-   *
-   * */
+  //Replacing the vowels with the values in replaces object
   let newText = text
     .split('')
     .map((letter) => (replaces[letter] ? replaces[letter] : letter))
     .join('');
 
-  //Cambio los elementos mostrados:
-  //Primero: muestro el resultado obtenido
-  let newData = document.getElementById('conResultado');
-  newData.style.display = 'flex';
-  asignarTextoElemento('#resultado', newText);
-  //Segundo oculto los elementos anteriores
-  let hideDiv = document.getElementById('sinResultado');
-  hideDiv.style.display = 'none';
-}
-
-function decodeString() {
-  let texto = document.getElementById('entrada').value;
-  let inversedReplaces = Object.entries(replaces).reduce((nuevoObjeto, [clave, valor]) => {
-    nuevoObjeto[valor] = clave;
-    return nuevoObjeto;
-  }, {});
-  let one = texto.replace(/enter|imes|ai|ober|ufat/g, (conjunto) => {
-    // Reemplazamos cada conjunto por la vocal correspondiente
-    return inversedReplaces[conjunto];
-  });
-  //Cambio los elementos mostrados:
-  //Primero: muestro el resultado obtenido
-  let newData = document.getElementById('conResultado');
-  newData.style.display = 'flex';
-  //   newData.style.flexDirection = 'column';
-  asignarTextoElemento('#resultado', one);
-  //Segundo oculto los elementos anteriores
-  let hideDiv = document.getElementById('sinResultado');
-  hideDiv.style.display = 'none';
+  //Changing the HTML elements
+  //Showing the results and the new buttons (#copyButton and #cleanButton)
+  showAndHide('conResultado', 'sinResultado');
+  asignTextElement('#resultado', newText);
 }
 
 /**
- * Esta función es creada con el objeto que valide los datos que
- * está ingresando el usuario
+ * DECRYPTION FUNCTIONS
+ * --------------------
+ *
  */
+
+function decodeString() {
+  let text = document.getElementById('entrada').value;
+
+  //In order to decode the words, first the object is reversed
+  let inversedReplaces = reverseReplaceObject();
+
+  //After it is done, the words grouped are replaces by their corresponding vowel
+  let one = text.replace(/enter|imes|ai|ober|ufat/g, (group) => {
+    return inversedReplaces[group];
+  });
+
+  //Then, the same process of showing/hiding HTML elements
+  showAndHide('conResultado', 'sinResultado');
+  asignTextElement('#resultado', one);
+}
+
+/**
+ * VALIDATION FUNCTIONS
+ * --------------------
+ */
+
+//The purpose of this function is to validate only lower case letters and showing errors
 function validateStrings() {
-  //Selecciona el input en el cual se está escribiendo
-  let elementoHTML = document.getElementById('entrada');
-  let texto = elementoHTML.value;
-
-  //Selecciona el elemento HTML que mostrará el error
-  const errorMessage = document.getElementById('errorMessage');
-
-  // La expresión regular nos indica que selecciona solo letras minusculas
-  /**
-   * ^ este simbolo nos indica el comienzo
-   */
+  let elemHTML = document.getElementById('entrada');
+  let text = elemHTML.value;
   const regex1 = /^[a-z\s]*$/;
 
-  if (regex1.test(texto)) {
-    errorMessage.style.display = 'none';
-    document.getElementById('wordchecker').style.display = '';
-    elementoHTML.style.border = '';
+  if (regex1.test(text)) {
+    //This block returns to normal view
+    showAndHide('wordchecker', 'errorMessage');
+    elemHTML.style.border = '';
   } else {
-    errorMessage.style.display = 'block';
-    document.getElementById('wordchecker').style.display = 'none';
-    elementoHTML.style.border = '3px solid red';
+    //showing errors
+    showAndHide('errorMessage', 'wordchecker');
+    elemHTML.style.border = '3px solid red';
     document.querySelector('.encrypt').setAttribute('disabled', '');
     document.querySelector('.undo-encrypt').setAttribute('disabled', '');
   }
 }
 
-function asignarTextoElemento(elemento, texto) {
-  let elementHTML = document.querySelector(elemento);
-  elementHTML.innerHTML = texto;
-}
-
-function cleanPage() {
-  let newData = document.getElementById('sinResultado');
-  newData.style.display = 'flex';
-  newData.style.flexDirection = 'column';
-
-  let hideDiv = document.getElementById('conResultado');
-  hideDiv.style.display = 'none';
-
-  let elementoHTML = document.getElementById('entrada');
-
-  elementoHTML.value = '';
-}
+/**
+ * EXTRA FUNCTION
+ * --------------
+ */
 
 async function copyResult() {
   try {
@@ -117,4 +89,35 @@ async function copyResult() {
   } catch (error) {
     alert('No se puede ejecutar el comando sin permisos');
   }
+}
+
+/**
+ * COMPLEMENTARY FUNCTIONS
+ * -----------------------
+ */
+function cleanPage() {
+  showAndHide('sinResultado', 'conResultado');
+
+  let elementHTML = document.getElementById('entrada');
+  elementHTML.value = '';
+}
+
+function showAndHide(objId1, objId2) {
+  let object1 = document.getElementById(objId1);
+  let object2 = document.getElementById(objId2);
+
+  object1.style.display = 'flex';
+  object2.style.display = 'none';
+}
+
+function reverseReplaceObject() {
+  return Object.entries(replaces).reduce((newObject, [key, value]) => {
+    newObject[value] = key;
+    return newObject;
+  }, {});
+}
+
+function asignTextElement(element, text) {
+  let elementHTML = document.querySelector(element);
+  elementHTML.innerHTML = text;
 }
