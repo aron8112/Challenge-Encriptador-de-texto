@@ -7,22 +7,30 @@ const replaces = {
   u: 'ufat',
 };
 
+/**
+ * CRYPTING FUNCTIONS
+ * ------------------
+ *
+ */
+
 function crypting() {
-  let texto = document.getElementById('entrada').value;
+  let text = document.getElementById('entrada').value;
 
   /**
+   *
    * Convierto el texto (string) en un array, y si es una vocal ejecuta el cambio,
    * finalmente con el método join retorno nuevamente el texto con los reemplazos
+   *
    * */
-  let newText = texto
+  let newText = text
     .split('')
-    .map((letra) => (replaces[letra] ? replaces[letra] : letra))
+    .map((letter) => (replaces[letter] ? replaces[letter] : letter))
     .join('');
 
   //Cambio los elementos mostrados:
   //Primero: muestro el resultado obtenido
   let newData = document.getElementById('conResultado');
-  newData.style.display = 'block';
+  newData.style.display = 'flex';
   asignarTextoElemento('#resultado', newText);
   //Segundo oculto los elementos anteriores
   let hideDiv = document.getElementById('sinResultado');
@@ -43,7 +51,7 @@ function decodeString() {
   //Primero: muestro el resultado obtenido
   let newData = document.getElementById('conResultado');
   newData.style.display = 'flex';
-  newData.style.flexDirection = 'column';
+  //   newData.style.flexDirection = 'column';
   asignarTextoElemento('#resultado', one);
   //Segundo oculto los elementos anteriores
   let hideDiv = document.getElementById('sinResultado');
@@ -76,10 +84,37 @@ function validateStrings() {
     errorMessage.style.display = 'block';
     document.getElementById('wordchecker').style.display = 'none';
     elementoHTML.style.border = '3px solid red';
+    document.querySelector('.encrypt').setAttribute('disabled', '');
+    document.querySelector('.undo-encrypt').setAttribute('disabled', '');
   }
 }
 
 function asignarTextoElemento(elemento, texto) {
   let elementHTML = document.querySelector(elemento);
   elementHTML.innerHTML = texto;
+}
+
+function cleanPage() {
+  let newData = document.getElementById('sinResultado');
+  newData.style.display = 'flex';
+  newData.style.flexDirection = 'column';
+
+  let hideDiv = document.getElementById('conResultado');
+  hideDiv.style.display = 'none';
+
+  let elementoHTML = document.getElementById('entrada');
+
+  elementoHTML.value = '';
+}
+
+async function copyResult() {
+  try {
+    let result = await navigator.permissions.query({ name: 'clipboard-write' });
+    if (result.state === 'granted' || result.state === 'prompt') {
+      let text = document.getElementById('resultado').innerText;
+      navigator.clipboard.writeText(text);
+    }
+  } catch (error) {
+    alert('No se puede ejecutar el comando sin permisos');
+  }
 }
