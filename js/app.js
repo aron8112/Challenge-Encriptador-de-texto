@@ -13,11 +13,11 @@ const replaces = {
  *
  */
 
-function crypting() {
-  let text = document.getElementById('entrada').value;
+function crypting(objId) {
+  const text = document.getElementById(objId).value;
 
   //Replacing the vowels with the values in replaces object
-  let newText = text
+  const newText = text
     .split('')
     .map((letter) => (replaces[letter] ? replaces[letter] : letter))
     .join('');
@@ -35,13 +35,13 @@ function crypting() {
  */
 
 function decodeString() {
-  let text = document.getElementById('entrada').value;
+  const text = document.getElementById('entrada').value;
 
   //In order to decode the words, first the object is reversed
-  let inversedReplaces = reverseReplaceObject();
+  const inversedReplaces = reverseReplaceObject();
 
   //After it is done, the words grouped are replaces by their corresponding vowel
-  let one = text.replace(/enter|imes|ai|ober|ufat/g, (group) => {
+  const one = text.replace(/enter|imes|ai|ober|ufat/g, (group) => {
     return inversedReplaces[group];
   });
 
@@ -57,8 +57,8 @@ function decodeString() {
 
 //The purpose of this function is to validate only lower case letters and showing errors
 function validateStrings() {
-  let elemHTML = document.getElementById('entrada');
-  let text = elemHTML.value;
+  const elemHTML = document.getElementById('entrada');
+  const text = elemHTML.value;
   const regex1 = /^[a-z\s]*$/;
 
   if (regex1.test(text)) {
@@ -81,9 +81,9 @@ function validateStrings() {
 
 async function copyResult() {
   try {
-    let result = await navigator.permissions.query({ name: 'clipboard-write' });
+    const result = await navigator.permissions.query({ name: 'clipboard-write' });
     if (result.state === 'granted' || result.state === 'prompt') {
-      let text = document.getElementById('resultado').innerText;
+      const text = document.getElementById('resultado').innerText;
       navigator.clipboard.writeText(text);
     }
   } catch (error) {
@@ -98,13 +98,13 @@ async function copyResult() {
 function cleanPage() {
   showAndHide('sinResultado', 'conResultado');
 
-  let elementHTML = document.getElementById('entrada');
+  const elementHTML = document.getElementById('entrada');
   elementHTML.value = '';
 }
 
 function showAndHide(objId1, objId2) {
-  let object1 = document.getElementById(objId1);
-  let object2 = document.getElementById(objId2);
+  const object1 = document.getElementById(objId1);
+  const object2 = document.getElementById(objId2);
 
   object1.style.display = 'flex';
   object2.style.display = 'none';
@@ -118,6 +118,6 @@ function reverseReplaceObject() {
 }
 
 function asignTextElement(element, text) {
-  let elementHTML = document.querySelector(element);
+  const elementHTML = document.querySelector(element);
   elementHTML.innerHTML = text;
 }

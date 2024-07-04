@@ -3,7 +3,7 @@
 :root {
     /*Background colors */
     --background-color: #D8DFE8;
-    --background-color-header: #b6b9bd;
+    --background-color-icon: #b6b9bd;
     --background-right-side: white;
 
     /*Font*/
@@ -33,39 +33,35 @@ body {
     color: var(--font-color);
 }
 
-header {
-    padding: 2%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1%;
-    background-color: var(--background-color-header);
-    display: flex;
-    align-items: center;
-}
-
-header img {
-    width: auto;
-    height: 30px;
-}
 
 main {
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
     flex-direction: row;
-    padding: 5%;
+    padding: 2%;
 }
 
 section {
     display: flex;
-    margin: 2%;
+    margin: 0 2% 1% 0;
     justify-content: center;
 }
 
+.icon {
+    width: 10%;
+    display: flex;
+    align-items: start;
+    justify-content: right;
+}
+
+.icon img {
+    width: auto;
+    height: 1.5rem;
+}
+
 .left-side {
-    width: 80%;
+    width: 70%;
     flex-direction: column;
 }
 
@@ -135,7 +131,7 @@ button:disabled {
 }
 
 .right-side {
-    height: 75vh;
+    height: 85vh;
     width: 25%;
     border: 0;
     padding: 1%;
@@ -236,6 +232,15 @@ button:disabled {
     color: var(--font-color);
 }
 
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--font-color-secondary);
+    margin-bottom: 2%;
+}
+
 /* Estilos para teléfonos inteligentes */
 @media (max-width: 480px) {
     header {
@@ -299,6 +304,7 @@ button:disabled {
 
     section {
         width: 100%;
+        margin: 5% 1%;
     }
 
     .left-side {
@@ -312,7 +318,8 @@ button:disabled {
 
     .right-side {
         width: 100%;
-        height: auto;
+        height: 25vh;
+        justify-content: center;
     }
 
     .right-side img {

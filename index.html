@@ -9,16 +9,16 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Encriptador de texto</title>
+    <script src="./js/app.js"></script>
 
 </head>
 
 <body>
-    <header>
-        <img src="./assets/logo.png" alt="Logo">
-    </header>
     <main>
+        <section class="icon">
+            <img src="./assets/logo.png" alt="Logo">
+        </section class="icon">
         <section class="left-side">
-            <!-- <label for="entrada"> Introduzca aquí su texto: </label> -->
             <input type="text" name="entrada" id="entrada" placeholder="Introduzca aquí su texto"
                 oninput="validateStrings();">
             <p id="errorMessage">Solamente se permiten letras minúsculas</p>
@@ -28,7 +28,7 @@
                     error
                 </span>Solo letras minúsculas y sin acentos</small>
             <div class="buttons">
-                <button class="encrypt" onclick="crypting();"><span class="material-symbols-rounded">
+                <button class="encrypt" onclick="crypting('entrada');"><span class="material-symbols-rounded">
                         key
                     </span>| Encriptar</button>
                 <button class="undo-encrypt" onclick="decodeString();"><span class="material-symbols-rounded">
@@ -52,9 +52,11 @@
                 </div>
             </div>
         </section>
-        <script src="./js/app.js"></script>
     </main>
-
+    <footer>
+        <p> Aron Siccardi</p>
+        <p>Challenge Encriptador de texto - Alura LatAm | ONE </p>
+    </footer>
 </body>
 
 </html>
